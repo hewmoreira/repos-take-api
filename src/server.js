@@ -1,14 +1,14 @@
-const url = 'https://api.github.com/orgs/takenet/repos?sort=created&direction=asc'
-const express = require ('express')
 const axios = require('axios')
+const express = require ('express')
 const app = express()
+const url = 'https://api.github.com/orgs/takenet/repos?sort=created&direction=asc'
 
 const language = f => f.language === 'C#'
 
 app.get('/', async (req, res) => {
 
     try {
-        const { data } = await axios (url)
+        const { data } = await axios(url)
         
         const repos = data
             .filter(language)
