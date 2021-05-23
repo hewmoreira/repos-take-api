@@ -21,6 +21,6 @@ app.get('/', async (req, res) => {
     }
 })
 
-app.listen(PORT, () => {
+app.listen(process.env.PORT || PORT, () => {
     console.log(`Servidor executando na porta ${PORT}.`)
 })
