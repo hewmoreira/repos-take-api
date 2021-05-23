@@ -10,13 +10,19 @@ app.get('/', async (req, res) => {
 
     try {
         const { data } = await axios(url)
-        const getMappedValues = ({ name, owner:{avatar_url}, description, created_at, language }) => ({ name, owner:{avatar_url}, created_at, description, language });
+        const getMappedValues = ({ id, name, owner:{avatar_url}, description, created_at, language }) => ({ id, name, owner:{avatar_url}, created_at, description, language });
         const repos = data
             .filter(language)
             .slice(0, maxRepos)
             .map(getMappedValues)
 
-        return res.json(repos)
+        function reducer(acc, cur){
+            return {...acc, [cur.id]: cur}
+        }
+
+        const repository = repos.reduce(reducer, {})   
+
+        return res.json(repository)
     } catch (error) {
         console.error(error)
     }
