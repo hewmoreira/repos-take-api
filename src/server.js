@@ -1,4 +1,3 @@
-const PORT = 3003
 const url = 'https://api.github.com/orgs/takenet/repos?sort=created&direction=asc'
 const express = require ('express')
 const axios = require('axios')
@@ -21,6 +20,6 @@ app.get('/', async (req, res) => {
     }
 })
 
-app.listen(process.env.PORT || PORT, () => {
-    console.log(`Servidor executando na porta ${PORT}.`)
-})
+app.listen(process.env.PORT || 3000, function(){
+    console.log("Express server listening on port %d in %s mode", this.address().port, app.settings.env);
+  });
